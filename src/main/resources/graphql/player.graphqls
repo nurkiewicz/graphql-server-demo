@@ -1,0 +1,28 @@
+type Player {
+    id: String!
+    name: String!
+    points: Int!
+    inventory: [Item!]!
+    billing: Billing!
+}
+
+type Billing {
+
+    balance: String!    # decimal string...
+    operations: [Operation!]!
+}
+
+type Operation {
+    amount: String!    # decimal string...
+    description: String
+}
+
+type Item {
+    name: String!
+}
+
+type Query {
+
+    currentPlayer: Player!
+
+}
