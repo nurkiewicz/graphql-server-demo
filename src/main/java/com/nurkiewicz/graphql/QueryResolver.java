@@ -16,7 +16,6 @@ import java.util.UUID;
 @RequiredArgsConstructor
 class QueryResolver implements GraphQLQueryResolver {
 
-    private final BillingRepository billingRepository;
     private final InventoryClient inventoryClient;
     private final PlayerMetadata playerMetadata;
     private final PointsCalculator pointsCalculator;
@@ -32,8 +31,7 @@ class QueryResolver implements GraphQLQueryResolver {
                 playerId,
                 playerMetadata.lookupName(playerId),
                 pointsCalculator.pointsOf(playerId),
-                inventoryClient.loadInventory(playerId),
-                billingRepository.forUser(playerId)
+                inventoryClient.loadInventory(playerId)
         );
     }
 
@@ -46,7 +44,6 @@ class Player {
     String name;
     int points;
     ImmutableList<Item> inventory;
-    Billing billing;
 }
 
 @Value
