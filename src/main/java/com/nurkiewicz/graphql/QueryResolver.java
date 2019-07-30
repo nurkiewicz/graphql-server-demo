@@ -16,10 +16,6 @@ import java.util.UUID;
 @RequiredArgsConstructor
 class QueryResolver implements GraphQLQueryResolver {
 
-    private final InventoryClient inventoryClient;
-    private final PlayerMetadata playerMetadata;
-    private final PointsCalculator pointsCalculator;
-
     Player currentPlayer() {
         return somePlayer();
     }
@@ -27,23 +23,14 @@ class QueryResolver implements GraphQLQueryResolver {
     @NotNull
     private Player somePlayer() {
         UUID playerId = UUID.randomUUID();
-        return new Player(
-                playerId,
-                playerMetadata.lookupName(playerId),
-                pointsCalculator.pointsOf(playerId),
-                inventoryClient.loadInventory(playerId)
-        );
+        return new Player(playerId);
     }
-
 
 }
 
 @Value
 class Player {
     UUID id;
-    String name;
-    int points;
-    ImmutableList<Item> inventory;
 }
 
 @Value

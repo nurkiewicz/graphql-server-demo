@@ -1,0 +1,3 @@
+logging:
+  level:
+    graphql.execution.ExecutionStrategy: DEBUG
