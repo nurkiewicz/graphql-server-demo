@@ -27,12 +27,13 @@ class QueryResolver implements GraphQLQueryResolver {
 
     @NotNull
     private Player somePlayer() {
+        UUID playerId = UUID.randomUUID();
         return new Player(
-                UUID.randomUUID(),
-                playerMetadata.lookupName(),
-                pointsCalculator.pointsOfCurrentUser(),
-                inventoryClient.loadInventory(),
-                billingRepository.forCurrentUser()
+                playerId,
+                playerMetadata.lookupName(playerId),
+                pointsCalculator.pointsOf(playerId),
+                inventoryClient.loadInventory(playerId),
+                billingRepository.forUser(playerId)
         );
     }
 
