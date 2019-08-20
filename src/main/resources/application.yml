@@ -1,3 +1,7 @@
 logging:
   level:
-    graphql.execution.ExecutionStrategy: DEBUG
+    graphql.execution.ExecutionStrategy: INFO
+
+spring:
+  application:
+    name: graphql-demo
