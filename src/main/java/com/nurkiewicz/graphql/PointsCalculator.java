@@ -2,6 +2,8 @@ package com.nurkiewicz.graphql;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+import reactor.core.publisher.Mono;
+import reactor.core.scheduler.Schedulers;
 
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
@@ -10,9 +12,13 @@ import java.util.concurrent.TimeUnit;
 @RequiredArgsConstructor
 class PointsCalculator {
 
-    int pointsOf(UUID playerId) throws InterruptedException {
-        TimeUnit.MILLISECONDS.sleep(100);
-        return 42;
+    Mono<Integer> pointsOf(UUID playerId) {
+        return Mono
+                .fromCallable(() -> {
+                    TimeUnit.MILLISECONDS.sleep(100);
+                    return 42;
+                })
+                .subscribeOn(Schedulers.elastic());
     }
 
 }
