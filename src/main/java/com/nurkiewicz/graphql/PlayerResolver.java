@@ -17,28 +17,19 @@ class PlayerResolver implements GraphQLResolver<Player> {
     private final PointsCalculator pointsCalculator;
 
     CompletableFuture<Billing> billing(Player player) {
-        return billingRepository
-                .forUser(player.getId())
-                .toFuture();
+        return billingRepository.forUser(player.getId());
     }
 
     CompletableFuture<String> name(Player player) {
-        return playerMetadata
-                .lookupName(player.getId())
-                .toFuture();
+        return playerMetadata.lookupName(player.getId());
     }
 
     CompletableFuture<Integer> points(Player player) {
-        return pointsCalculator
-                .pointsOf(player.getId())
-                .toFuture();
+        return pointsCalculator.pointsOf(player.getId());
     }
 
     CompletableFuture<List<Item>> inventory(Player player) {
-        return inventoryClient
-                .loadInventory(player.getId())
-                .collectList()
-                .toFuture();
+        return inventoryClient.loadInventory(player.getId());
     }
 
 }

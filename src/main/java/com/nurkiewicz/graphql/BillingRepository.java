@@ -1,25 +1,28 @@
 package com.nurkiewicz.graphql;
 
 import com.google.common.collect.ImmutableList;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import reactor.core.publisher.Mono;
-import reactor.core.scheduler.Schedulers;
 
 import java.math.BigDecimal;
+import java.time.Duration;
 import java.util.UUID;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutorService;
 
+@RequiredArgsConstructor
 @Component
 class BillingRepository {
 
-    Mono<Billing> forUser(UUID playerId) {
-        return Mono
-                .fromCallable(() -> {
-                    TimeUnit.MILLISECONDS.sleep(300);
+    private final ExecutorService billingExecutor;
+
+    CompletableFuture<Billing> forUser(UUID playerId) {
+        return CompletableFuture.supplyAsync(() -> {
+                    Sleeper.sleep(Duration.ofMillis(300));
                     return new Billing(BigDecimal.TEN, ImmutableList.of(
                             new Operation(BigDecimal.TEN, "Item purchase")
                     ));
-                }).subscribeOn(Schedulers.elastic());
+                }, billingExecutor);
     }
 
 }

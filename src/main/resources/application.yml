@@ -3,5 +3,6 @@ logging:
     graphql.execution.ExecutionStrategy: INFO
 
 spring:
-  application:
-    name: graphql-demo
+  sleuth:
+    async:
+      enabled: false
