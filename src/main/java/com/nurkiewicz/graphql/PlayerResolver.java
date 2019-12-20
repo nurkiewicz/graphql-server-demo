@@ -20,25 +20,25 @@ class PlayerResolver implements GraphQLResolver<Player> {
     private final PointsCalculator pointsCalculator;
     private final Tracer tracer;
 
-    Billing billing(Player player) throws InterruptedException {
+    Billing billing(Player player) {
         return inSpan("billing",
                 () -> billingRepository.forUser(player.getId())
         );
     }
 
-    String name(Player player) throws InterruptedException {
-        return inSpan("name",
+    String name(Player player) {
+        return inSpan("player",
                 () -> playerMetadata.lookupName(player.getId())
         );
     }
 
-    int points(Player player) throws InterruptedException {
+    int points(Player player) {
         return inSpan("points",
                 () -> pointsCalculator.pointsOf(player.getId())
         );
     }
 
-    ImmutableList<Item> inventory(Player player) throws InterruptedException {
+    ImmutableList<Item> inventory(Player player) {
         return inSpan("inventory",
                 () -> inventoryClient.loadInventory(player.getId())
         );
