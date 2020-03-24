@@ -2,6 +2,12 @@ logging:
   level:
     graphql.execution.ExecutionStrategy: INFO
 
+
+graphql:
+  servlet:
+    websocket:
+      enabled: false
+
 spring:
   sleuth:
     async:
