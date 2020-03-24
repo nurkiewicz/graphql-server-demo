@@ -1,6 +1,6 @@
 # GraphQL server in Java demo application
 
-Description
+See the following articles for details:
 
 * [Part I: Basics](https://www.nurkiewicz.com/2019/10/graphql-server-in-java-part-i-basics.html)
 * [Part II: Understanding Resolvers](https://www.nurkiewicz.com/2019/10/graphql-server-in-java-part-ii.html)
